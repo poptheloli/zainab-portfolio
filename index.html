@@ -291,6 +291,13 @@ details[open] summary{border-bottom:1px solid #000}
   display:block;
   transition:transform .2s;
 }
+.ev-img-wrap video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#050505;
+  display:block;
+}
 .ev-figure:hover .ev-img-wrap img{transform:scale(1.02)}
 .fig-tag{
   position:absolute;
@@ -1620,18 +1627,45 @@ var L=[
     topic: "Dais presentations, Q&A handling & MCQs assessment",
     pct: 90,
     eng: 96,
-    teachingImg: "images/student_presentations_teaching.jpg",
-    teachingTitle: "Evaluating Presentations & Moderating Q&A",
-    teachingDesc: "Zainab evaluating student speakers, moderating peer questions, and providing constructive feedback",
+    videoSrc: "images/presentation_video.mp4",
+    teachingImg: "images/presentational_skills_teaching.jpg",
+    teachingTitle: "Student Dais Presentations (Vertical Video)",
+    teachingDesc: "Vertical video recording of First Year students presenting assigned topics at the dais with spontaneous peer Q&A",
     activityImg: "images/student_presentations_activity.jpg",
-    activityTitle: "Student Presentations & MCQs Evaluation",
-    activityDesc: "Students presenting at the dais with peer interaction, followed by presentation MCQs assessment",
+    activityTitle: "Presentation Skills Assessment (MCQs Worksheet)",
+    activityDesc: "Completed MCQs assessment sheets on presentation structure, delivery techniques, and audience management with 'Well done' feedback",
     graphTitle: "Presentation & MCQs Results",
     graphDesc: "Graph 100-90 · 90% presentation delivery accuracy and MCQs comprehension"
   }
 ];
 
 document.getElementById('lessons').innerHTML = L.map(function(l, i){
+  var mediaBox = l.videoSrc
+    ? '<figure class="ev-figure">'
+      + '<div class="ev-img-wrap" style="background:#050505">'
+        + '<video controls playsinline preload="metadata" poster="' + (l.teachingImg || '') + '" style="width:100%;height:100%;object-fit:contain;background:#050505;display:block">'
+          + '<source src="' + l.videoSrc + '" type="video/mp4">'
+          + '<source src="' + l.videoSrc.replace('.mp4', '.mov') + '" type="video/quicktime">'
+          + 'Your browser does not support HTML5 video.'
+        + '</video>'
+        + '<span class="fig-tag" style="background:var(--pink);color:#000;font-weight:700">🎬 Classroom Video</span>'
+      + '</div>'
+      + '<figcaption>'
+        + '<b>' + l.teachingTitle + '</b>'
+        + '<span>' + l.teachingDesc + '</span>'
+      + '</figcaption>'
+    + '</figure>'
+    : '<figure class="ev-figure">'
+      + '<div class="ev-img-wrap">'
+        + '<img src="' + l.teachingImg + '" alt="' + l.teachingTitle + '" onerror="handleImgError(this, \'Teaching\', \'' + l.teachingImg + '\', \'' + l.teachingDesc.replace(/'/g, "\\'") + '\')">'
+        + '<span class="fig-tag">Teaching Photo</span>'
+      + '</div>'
+      + '<figcaption>'
+        + '<b>' + l.teachingTitle + '</b>'
+        + '<span>' + l.teachingDesc + '</span>'
+      + '</figcaption>'
+    + '</figure>';
+
   return '<div class="lesson">'
     + '<div class="lesson-head">'
       + '<div>'
@@ -1641,17 +1675,8 @@ document.getElementById('lessons').innerHTML = L.map(function(l, i){
       + '<span class="badge-pct">' + l.pct + '% Understanding Rate</span>'
     + '</div>'
     + '<div class="ev">'
-      + '<!-- Box 1: Teaching Photo -->'
-      + '<figure class="ev-figure">'
-        + '<div class="ev-img-wrap">'
-          + '<img src="' + l.teachingImg + '" alt="' + l.teachingTitle + '" onerror="handleImgError(this, \'Teaching\', \'' + l.teachingImg + '\', \'' + l.teachingDesc.replace(/'/g, "\\'") + '\')">'
-          + '<span class="fig-tag">Teaching Photo</span>'
-        + '</div>'
-        + '<figcaption>'
-          + '<b>' + l.teachingTitle + '</b>'
-          + '<span>' + l.teachingDesc + '</span>'
-        + '</figcaption>'
-      + '</figure>'
+      + '<!-- Box 1: Teaching Photo or Video -->'
+      + mediaBox
       + '<!-- Box 2: Activity Photo (students doing paper/test/worksheet) -->'
       + '<figure class="ev-figure">'
         + '<div class="ev-img-wrap">'
