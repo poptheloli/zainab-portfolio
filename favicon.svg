@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- 3D Shadow Rim -->
+  <circle cx="136" cy="133" r="102" fill="#827b82"/>
+  <circle cx="136" cy="133" r="98" fill="#d89ec5"/>
+  <!-- Main Coin Face -->
+  <circle cx="120" cy="122" r="102" fill="#827b82"/>
+  <circle cx="120" cy="122" r="97" fill="#f7c5e2"/>
+  <!-- Italic Z -->
+  <text x="120" y="158" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="104" font-weight="900" font-style="italic" text-anchor="middle" fill="#827b82">Z</text>
+</svg>
